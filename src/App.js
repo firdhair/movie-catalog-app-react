@@ -15,7 +15,8 @@ class App extends Component {
         title: [],
         plot: [],
         year: [],
-        poster: []
+        poster: [],
+        id: []
       },
       final: [],
       final2: []
@@ -41,7 +42,7 @@ class App extends Component {
     //console.log(movieData)
     const getMovie2 = movieData.Search
             
-    console.log(getMovie2.length)
+    console.log(movieData.length)
     for(let i = 1; i < getMovie2.length; i++) {
         //console.log(getMovie2[i])
         const getMovieId = movieData.Search[i].imdbID
@@ -60,19 +61,23 @@ class App extends Component {
             title: getMovieTitle,
             plot: getMoviePlot,
             poster: getMoviePoster,
-            year: getMovieYear
+            year: getMovieYear,
+            id: getMovieId
           },
           
           final: this.state.final.concat(this.state.compile)
         });
         }
+        console.log("this state compile: ",this.state.compile)
+        //console.log("this final state: ", this.state.final)
     }
     this.setState({
       final2: this.state.final2.concat(this.state.final)
     })
-    console.log("final2 ", this.state.final2)
+    console.log("ini state final ", this.state.final)
+    console.log("ini final2 ", this.state.final)
     this.setState(this.initialState)
-    console.log("final2 changed",this.state.final2)
+    console.log("final2 changed",this.state.final)
   }
 
   restart(e){
@@ -84,7 +89,7 @@ class App extends Component {
 
   
   render() { 
-    const {final2} = this.state
+    const {final2, final} = this.state
     //console.log("title: ",title)
     return (
        <div className="container">
@@ -98,7 +103,7 @@ class App extends Component {
             </form>
         </div>
         <div className="row movie-wrapper">
-          <Card final2={final2}/>
+          <Card final2={final2} final={final} />
         </div>
     </div>
     );
